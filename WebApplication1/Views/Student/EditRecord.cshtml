@@ -1,0 +1,115 @@
+﻿@model WebApplication1.Models.StudentModel
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+@{
+    ViewBag.Title = "EditRecord";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<style>
+    #updatestudentrecord {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+        width: calc(100% - 20px);
+        padding: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+    .clearfix::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
+
+
+<div id="main-wrapper" class="clearfix">
+
+    <div class="container">
+        <div class="clearfix">
+            <h2 class="heading">
+                Update Student Record
+            </h2>
+
+            <form id="updatestudentrecord">
+                @Html.HiddenFor(model => model.StudentID)
+
+                <label for="StudentName" id="StudentName">Student Name:</label>
+                <span>@Html.TextBoxFor(item => item.StudentName)</span><br />
+
+                <label for="Contact" id="Contact">Contact:</label>
+                <span>@Html.TextBoxFor(item => item.Contact)</span><br />
+
+                <label for="EmailID" id="EmailID">Email ID:</label>
+                <span>@Html.TextBoxFor(item => item.EmailID)</span><br />
+
+                <label for="Language" id="Language">Language:</label>
+                <span>@Html.TextBoxFor(item => item.Language)</span><br />
+
+                <label for="AddressLine1" id="AddressLine1">Address Line 1:</label>
+                <span>@Html.TextBoxFor(item => item.AddressLine1)</span><br />
+
+                <label for="AddressLine2" id="AddressLine2">Address Line 2:</label>
+                <span>@Html.TextBoxFor(item => item.AddressLine2)</span><br />
+
+                <label for="State" id="State">State:</label>
+                <span>@Html.TextBoxFor(item => item.State)</span><br />
+
+                <label for="Country" id="Country">Country:</label>
+                <span>@Html.TextBoxFor(item => item.Country)</span><br />
+
+
+
+                <br />
+                <button type="submit" class="btn btn-primary" onclick="UpdateForm();">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function UpdateForm() {
+        var formData = $('#updatestudentrecord').serialize();
+     $.ajax({
+         type: "PUT",
+         url: '@Url.Action("EditRecordsAPI", "Student")',
+         data: formData,
+         success: function (response) {
+             alert("Data has been updated");
+         },
+         error: function (xhr, status, error) {
+             console.error("Error occurred:", error);
+             alert("We have errors", error);
+         }
+     });
+
+    
+ }
+</script>

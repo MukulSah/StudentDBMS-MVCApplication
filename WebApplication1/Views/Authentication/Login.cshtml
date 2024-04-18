@@ -1,0 +1,75 @@
+﻿@model WebApplication1.Models.UserLogin
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="~/Content/bootstrap_theme.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<style>
+    .container {
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    .card {
+        width: 400px;
+        max-width: 400px;
+        margin: auto;
+    }
+</style>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-header">
+                    Login
+                    <button type="button" class="btn btn-primary btn-sm" style="float:right;" id="registerhere" onclick="register()">Register</button>
+                </div>
+                <div class="card-body">
+
+                    @using (Html.BeginForm("Login", "Authentication", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EmailID)
+                            @Html.TextBoxFor(model => model.EmailID, "", new { @class = "form-control", @placeholder = "Email" })
+                            @Html.ValidationMessageFor(model => model.EmailID)
+
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password)
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Password" })
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </div>
+                        <div class="form-group" style="bottom:0px; ">
+                            <input type="submit" name="submit" class="btn btn-primary" style="margin-top: 10px;" value="Login" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script type="text/javascript">
+function register() {
+
+    $.ajax({
+        url: '@Url.Action("Register", "Authentication")',
+        contentType: 'application/json',
+        success: function (response) {
+            console.log("Registration successful");
+        },
+        error: function (xhr, status, error) {
+            console.error("Error occurred:", error);
+            alert("Error occurred: " + error);
+        }
+    });
+}
+
+    </script>

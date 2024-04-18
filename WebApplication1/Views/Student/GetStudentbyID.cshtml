@@ -1,0 +1,71 @@
+﻿@model WebApplication1.Models.StudentModel
+@{
+    ViewBag.Title = "GetStudentbyID";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetStudentbyID</title>
+    <style>
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px;
+            width: 300px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+            .card label {
+                font-weight: bold;
+            }
+
+        .card-body {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="clearfix">
+                <h2 class="card-header clearfix">View Student Record</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <label for="StudentID" id="StudentID">Student ID:</label>
+                    <span>@Html.DisplayFor(item => item.StudentID)</span><br />
+
+                    <label for="StudentName" id="StudentName">Student Name:</label>
+                    <span>@Html.DisplayFor(item => item.StudentName)</span><br />
+
+                    <label for="Contact" id="Contact">Contact:</label>
+                    <span>@Html.DisplayFor(item => item.Contact)</span><br />
+
+                    <label for="EmailID" id="EmailID">Email ID:</label>
+                    <span>@Html.DisplayFor(item => item.EmailID)</span><br />
+
+                    <label for="Language" id="Language">Language:</label>
+                    <span>@Html.DisplayFor(item => item.Language)</span><br />
+
+                    <label for="AddressLine1" id="AddressLine1">Address Line 1:</label>
+                    <span>@Html.DisplayFor(item => item.AddressLine1)</span><br />
+
+                    <label for="AddressLine2" id="AddressLine2">Address Line 2:</label>
+                    <span>@Html.DisplayFor(item => item.AddressLine2)</span><br />
+
+                    <label for="State" id="State">State:</label>
+                    <span>@Html.DisplayFor(item => item.State)</span><br />
+
+                    <label for="Country" id="Country">Country:</label>
+                    <span>@Html.DisplayFor(item => item.Country)</span><br />
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

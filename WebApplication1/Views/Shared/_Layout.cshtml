@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    @*<link href="~/Content/bootstrap_theme.css" rel="stylesheet" />*@
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .sidebar {
+            position: fixed;
+            float: right;
+            width: 220px;
+            height: 100%;
+            //background-color: #f8f9fa;
+            border-top: thick;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+   @Html.ActionLink("Axom", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div style="float:right;" @*class="collapse navbar-collapse d-sm-inline-flex justify-content-between"*@>
+                <ul class="navbar-nav flex-grow-1">
+                    @if (Session["FullName"] != null)
+                    {
+                        <ul>
+                            <li><p style="color:aliceblue" ;> Hi @Session["FullName"].ToString()</p></li>
+                            <a href="@Url.Action("Logout", "Authentication")" class="btn btn-warning">Logout</a>
+                        </ul>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/Student" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Student
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="@Url.Action("CreateStudentView", "Student")">Create Student Record</a>
+                                <a class="dropdown-item" href="@Url.Action("ViewAllRecords", "Student")">View All Records</a>
+                                <a class="dropdown-item" href="@Url.Action("EditRecord", "Student")">Edit Records</a>
+                                <a class="dropdown-item" href="@Url.Action("GetStudentbyID", "Student")">Get by id</a>
+                            </div>
+                        </li>
+
+                        @*@Html.ActionLink("CreateStudentRecord", "CreateStudentView", "Student", new { area = "" }, new { @class = "dropdown-item" })*@
+                        <li class="nav-item">@Html.ActionLink("Account Setting", "Authentication", "", new { area = "" }, new { @class = "nav-link" })</li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>Creator: Mukul Kumar Sah ©</p>
+            <p></p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

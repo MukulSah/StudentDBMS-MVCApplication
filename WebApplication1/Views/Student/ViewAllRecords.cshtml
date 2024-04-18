@@ -1,0 +1,72 @@
+﻿
+    @ViewBag.listofstudentdatabyid
+@{
+    ViewBag.Title = "ViewAllRecords";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewAllRecords</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="clearfix">
+                <h2 class="heading clearfix">
+                    View All Student Records
+                </h2>
+            </div>
+            <table class="table">
+                <thead style="background-color: aquamarine;">
+                    <tr>
+                        <th scope="col">StudentID</th>
+                        <th scope="col">Student Name</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Email ID</th>
+                        <th scope="col">Language</th>
+                        <th scope="col">Address Line 1</th>
+                        <th scope="col">Address Line 2</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Pincode</th>
+                        <th scope="col">Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.listofstudentdata)
+                    {
+                        <tr>
+                            <td>@item.StudentID</td>
+                            <td>@item.StudentName</td>
+                            <td>@item.Contact</td>
+                            <td>@item.EmailID</td>
+                            <td>@item.Language</td>
+                            <td>@item.AddressLine1</td>
+                            <td>@item.AddressLine2</td>
+                            <td>@item.State</td>
+                            <td>@item.Pincode</td>
+                            <td>@item.Country</td>
+                         
+                            <td>
+                                <a href="@Url.Action("GetStudentbyID", "Student", new { id = item.StudentID })" class="btn btn-outline-primary">View</a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("EditRecord", "Student", new { id = item.StudentID })" class="btn btn-outline-primary">Edit</a>
+                            </td>
+                        </tr>
+                    }
+             
+                </tbody>
+            </table>
+        </div>
+    </div>
+   
+</body>
+</html>
+

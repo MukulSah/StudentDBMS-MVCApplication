@@ -1,0 +1,131 @@
+﻿@model WebApplication1.Models.StudentModel
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+@{
+    ViewBag.Title = "CreateStudentView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="main-wrapper" class="clearfix">
+    <div class="container">
+        <div class="clearfix">
+            <h2 class="heading">
+                Create Student Record
+            </h2>
+            <button type="button" class="btn btn btn-outline-success" style="float:right;" onclick="ViewData();">View All Records</button>
+            <form id="studentForm" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label for="StudentName">Student Name</label>
+                    <input type="text" class="form-control" id="StudentName" placeholder="Enter your Fullname" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="Contact">Contact Number</label>
+                    <input type="text" class="form-control" id="Contact" placeholder="Enter your Contact number" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="EmailID">Email ID</label>
+                    <input type="text" class="form-control" id="EmailID" placeholder="Enter your EmailID" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="Languagee">Language</label>
+                    <input type="text" class="form-control" id="Languagee" placeholder="Language" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="AddressLine1">Address Line 1</label>
+                    <input type="text" class="form-control" id="AddressLine1" placeholder="Enter AddressLine1" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="AddressLine2">Address Line 2</label>
+                    <input type="text" class="form-control" id="AddressLine2" placeholder="Enter AddressLine2" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="Statee">State</label>
+                    <input type="text" class="form-control" id="Statee" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="Pincode">Pincode</label>
+                    <input type="text" class="form-control" id="Pincode" placeholder="Enter Pincode" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="Country">Country</label>
+                    <input type="text" class="form-control" id="Country" required/>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-primary" onclick="submitForm();">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function validateForm() {
+        var isValid = true;
+
+        var pincode = document.getElementById('Pincode').value;
+        if (!/^\d+$/.test(pincode)) {
+            isValid = false;
+            alert("Pincode should contain only digits.");
+        }
+
+       
+        return isValid;
+    }
+
+    function submitForm() {
+        var formData = {
+            StudentName: $('#StudentName').val(),
+            Contact: $('#Contact').val(),
+            EmailID: $('#EmailID').val(),
+            Language: $('#Languagee').val(),
+            AddressLine1: $('#AddressLine1').val(),
+            AddressLine2: $('#AddressLine2').val(),
+            State: $('#Statee').val(),
+            Pincode: $('#Pincode').val(),
+            Country: $('#Country').val()
+        };
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CreateStudentRecordAPI", "Student")',
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            success: function (response) {
+                alert("Data has been saved");
+            },
+            error: function (xhr, status, error) {
+                console.error("Error occurred:", error);
+                alert("We have errors", error);
+            }
+        });
+
+        return false;
+    }
+
+    function ViewData() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("ViewAllRecords", "Student")',
+            contentType: 'application/json',
+            success: function (response) {
+                console.log("Data viewing");
+                window.location.href = '/Student/ViewAllRecords';
+            },
+            error: function (xhr, status, error) {
+                console.error("Error occurred:", error);
+                alert("We have errors", error);
+            }
+        });
+    }
+
+
+</script>

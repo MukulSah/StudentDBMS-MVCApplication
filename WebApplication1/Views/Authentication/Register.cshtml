@@ -1,0 +1,98 @@
+﻿@model WebApplication1.Models.USERDB
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+<style>
+
+    .box-form {
+        height: 100vh; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    .content-form {
+        max-width: 400px; 
+        width: 100%;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+  
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .txt-input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box; 
+    }
+
+
+    .txt-submit {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+      
+        .txt-submit:hover {
+            background-color: #0056b3;
+        }
+</style>
+
+<div class="box-form">
+    <div class="content-form">
+        @using (Html.BeginForm("Register", "Authentication", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <h2><center>Student DBMS</center></h2><br />
+            <h5>Sign Up here for login</h5>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstName)
+                @Html.TextBoxFor(model => model.FirstName, new { @class = "txt-input", @placeholder = "First Name" })
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastName)
+                @Html.TextBoxFor(model => model.LastName, new { @class = "txt-input", @placeholder = "Last Name" })
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmailID)
+                @Html.TextBoxFor(model => model.EmailID, new { @class = "txt-input", @placeholder = "Email" })
+                @Html.ValidationMessageFor(model => model.EmailID)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password)
+                @Html.PasswordFor(model => model.Password, new { @class = "txt-input", @placeholder = "Password" })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ConfirmPassword)
+                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "txt-input", @placeholder = "Password Confirm" })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" name="Submit" class="txt-submit" />
+            </div>
+        }
+    </div>
+</div>
